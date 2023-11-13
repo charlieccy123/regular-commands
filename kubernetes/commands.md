@@ -18,14 +18,41 @@ docker tag 源镜像:TAG  目标仓库:TAG
 docker system prune -a
 systemctl stop docker && systemctl start docker
 
-# 清理 72小时没有使用的
-docker image prune -a --force --filter "until=72h"
-
 # 提供DOCKER整体磁盘使用情况，镜像、容器
 docker system df
+
+# 清理 72小时没有使用的镜像
+docker image prune -a --force --filter "until=72h"
+
+# 强制删除所有镜像
+docker image prune --force --all
+
+# 清理所有构建缓存
+docker builder prune -a
+
+# 清理磁盘 删除没用的容器 无用的数据卷，包括构建cache
+docker system prune --all
+
+# 拉指定平台的
+docker pull --platform amd64 nginx
+
+# 指定dockerfile并制定构建那种平台的镜像，-t为镜像标签
+docker build -f ./docker/Dockerfile_testnet --platform linux/x86_64 -t index-f7711f7 .
 ```
 
+## kaniko 构建
 
+```bash
+docker login --username=admin --password=vbrho#h1pcw9wkt7h856cb9w nexus-dev-image.fulltrust.link
+
+docker run -ti --rm -v `pwd`:/workspace -v /Users/charlie/.docker/config.json:/kaniko/.docker/config.json:ro gcr.io/kaniko-project/executor:latest --dockerfile=./Dockerfile --destination=aaa:1.0 --no-push
+```
+
+## helm
+
+```bash
+helm template kube-prometheus-stack -n monitoring --name-template prometheus --output-dir ~/Downloads
+```
 
 ## Containerd
 

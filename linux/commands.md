@@ -64,6 +64,16 @@ ls -i
 find ./ -inum 问号文件ID -delete
 ```
 
+## 用户
+
+```bash
+# 创建系统用户，-M不创建家目录 -g加入到哪个组 -N 不创建同名的用户组
+sudo useradd -r -s /bin/nologin node-exp -M -g users
+
+# 把指定用户加入到某个组,把docker用户加入到root组
+sudo usermod -aG root docker 
+```
+
 ## 定时任务
 
 ```bash
