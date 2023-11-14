@@ -5,9 +5,9 @@
 ## Docker
 
 ```bash
-docker login --username=admin --password=Harbor12345 sdb-hb.kucoin.net
-docker login --username=admin --password=iVCywQjp5vu0AVAHLcTm hb.kucoin.net
-docker logout sdb-hb.kucoin.net
+docker login --username=admin --password=PASSWORD REPO_URL
+docker login --username=admin --password=PASSWORD REPO_URL
+docker logout REPO_URL
 
 docker save -o xxx.tar 镜像:tag
 docker load -i ./xxx.tar
@@ -43,7 +43,7 @@ docker build -f ./docker/Dockerfile_testnet --platform linux/x86_64 -t index-f77
 ## kaniko 构建
 
 ```bash
-docker login --username=admin --password=vbrho#h1pcw9wkt7h856cb9w nexus-dev-image.fulltrust.link
+docker login --username=admin --password=PASSWORD REPO_URL
 
 docker run -ti --rm -v `pwd`:/workspace -v /Users/charlie/.docker/config.json:/kaniko/.docker/config.json:ro gcr.io/kaniko-project/executor:latest --dockerfile=./Dockerfile --destination=aaa:1.0 --no-push
 ```
