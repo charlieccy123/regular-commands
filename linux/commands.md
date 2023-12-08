@@ -15,6 +15,15 @@ mkfs.xfs -f /dev/vdb  # 或者 mkfs -t xfs /dev/vdb
 echo `blkid /dev/vdb | awk '{print $2}' | sed 's/\"//g'` /data xfs defaults 0 0 >> /etc/fstab
 mkdir /data
 mount -a
+
+# 获取uuid
+ls -l /dev/disk/by-uuid/
+lsblk -f
+
+
+# 手动挂载 vim /etc/fstab
+UUID=67e1b56a-24ea-4049-bbff-5cb1326661b8 /data xfs defaults 0 0
+
 ```
 
 磁盘扩容
